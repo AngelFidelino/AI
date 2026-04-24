@@ -1,128 +1,103 @@
-# Feature Specification: [FEATURE NAME]
+# Feature Specification: Styling Adjustment - Card Reorder, Vertical Toolbar & Toast Notifications
 
-**Feature Branch**: `[###-feature-name]`  
-**Created**: [DATE]  
+**Feature Branch**: `[005-styling-adjustment]`  
+**Created**: April 24, 2026  
 **Status**: Draft  
-**Input**: User description: "$ARGUMENTS"
+**Input**: User description: "@preparation/5.styling-adjustment.md"
+
+## Clarifications
+
+### Session 2026-04-24
+
+- Q: Toast Message Content Specification → A: Use generic templated messages: "Calculation completed successfully" and "Calculation failed: [specific error]"
+- Q: Accessibility Compliance Standard → A: WCAG 2.1 AA compliance (contrast ratios, keyboard navigation, screen reader support)
+- Q: Toast Trigger Event Specification → A: Trigger on form submission response only (successful API call or validation error)
+- Q: Performance Target for Toast Animations → A: 16ms frame time target (60fps) for smooth animations
 
 ## User Scenarios & Testing *(mandatory)*
 
-<!--
-  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
-  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
-  you should still have a viable MVP (Minimum Viable Product) that delivers value.
-  
-  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
-  Think of each story as a standalone slice of functionality that can be:
-  - Developed independently
-  - Tested independently
-  - Deployed independently
-  - Demonstrated to users independently
--->
+### User Story 1 - Reordered Card Layout (Priority: P1)
 
-### User Story 1 - [Brief Title] (Priority: P1)
+As a consumer viewing the loan payment results, I want to see the Total Payment card on the left and the Monthly Payment card on the right so that the most comprehensive cost metric leads visually and monthly payment is the natural answer on the right.
 
-[Describe this user journey in plain language]
+**Why this priority**: This is a simple UI rearrangement that improves the visual hierarchy and user comprehension without changing functionality.
 
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
+**Independent Test**: Can be fully tested by rendering the PaymentDisplay component and verifying the card positions in the layout grid.
 
 **Acceptance Scenarios**:
 
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-2. **Given** [initial state], **When** [action], **Then** [expected outcome]
+1. **Given** the PaymentDisplay component renders with valid calculation data, **When** viewing on desktop or tablet, **Then** Total Payment card appears in the left column and Monthly Payment in the right column
+2. **Given** the PaymentDisplay component renders with valid calculation data, **When** viewing on mobile, **Then** cards stack vertically in order: Total Payment, Monthly Payment, Payment Breakdown
 
 ---
 
-### User Story 2 - [Brief Title] (Priority: P2)
+### User Story 2 - Vertical Purple Toolbar (Priority: P2)
 
-[Describe this user journey in plain language]
+As a consumer using the application, I want to see a vertical purple toolbar on the far left of the screen with a Loan Simulator icon so that I have a persistent, branded navigation anchor point for the application.
 
-**Why this priority**: [Explain the value and why it has this priority level]
+**Why this priority**: Provides a consistent navigation element that enhances brand presence and offers quick access to the main feature.
 
-**Independent Test**: [Describe how this can be tested independently]
+**Independent Test**: Can be fully tested by mounting the application and verifying the toolbar renders with correct styling and interaction behavior.
 
 **Acceptance Scenarios**:
 
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
+1. **Given** the application renders, **When** viewing on any device, **Then** a purple vertical toolbar is visible on the far left edge
+2. **Given** the toolbar is visible, **When** a user clicks or taps the calculator icon, **Then** the page scrolls smoothly to the Loan Input Form
 
 ---
 
-### User Story 3 - [Brief Title] (Priority: P3)
+### User Story 3 - Toast Notifications (Priority: P3)
 
-[Describe this user journey in plain language]
+As a consumer interacting with the loan calculator, I want to see brief notifications when a calculation completes or an error occurs so that I have clear, immediate feedback about the result of my actions without navigating away from my current view.
 
-**Why this priority**: [Explain the value and why it has this priority level]
+**Why this priority**: Improves user experience by providing non-intrusive feedback for actions and errors.
 
-**Independent Test**: [Describe how this can be tested independently]
+**Independent Test**: Can be fully tested by triggering toast notifications and verifying they appear, persist, and dismiss correctly.
 
 **Acceptance Scenarios**:
 
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
+1. **Given** a form submission completes successfully, **When** the API response indicates success, **Then** a green toast appears with "Calculation completed successfully" message and auto-dismisses after 4 seconds
+2. **Given** a form submission fails, **When** the API response or validation indicates error, **Then** a red toast appears with "Calculation failed: [specific error]" message and auto-dismisses after 6 seconds
 
 ---
-
-[Add more user stories as needed, each with an assigned priority]
 
 ### Edge Cases
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right edge cases.
--->
-
-- What happens when [boundary condition]?
-- How does system handle [error scenario]?
+- What happens when multiple toasts are triggered in quick succession? - Stack vertically with max 3 visible, dismiss oldest when limit exceeded
+- How does system handle rapid toolbar icon clicks? - Only single scroll action triggered, subsequent clicks ignored while scrolling
+- What happens on very small mobile screens? - Toolbar reduces to 56px width, toasts adapt to full width
 
 ## Requirements *(mandatory)*
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right functional requirements.
--->
-
 ### Functional Requirements
 
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
-
-*Example of marking unclear requirements:*
-
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+- **FR-001**: System MUST swap the horizontal positions of Total Payment and Monthly Payment cards in the Payment Display component
+- **FR-002**: System MUST render a 76px wide vertical toolbar with purple background (#5B4FFF) on the far left edge  
+- **FR-003**: System MUST display a white calculator icon in the toolbar that scrolls to the Loan Input Form when activated
+- **FR-004**: System MUST show green success toasts with message "Calculation completed successfully" for calculation completion with 4-second auto-dismiss
+- **FR-005**: System MUST show red error toasts with message "Calculation failed: [specific error]" for calculation failures with 6-second auto-dismiss
+- **FR-006**: System MUST position main application content with 76px left offset to avoid_overlap with toolbar
+- **FR-007**: System MUST adapt layout for mobile with 56px toolbar and single-column card stacking
 
 ### Key Entities *(include if feature involves data)*
 
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
+- **Toast Notification**: A transient UI feedback entity with properties (type: info/error, message: string, duration: ms, animation target: 16ms frame time)
+- **Vertical Toolbar**: A persistent navigation element with properties (width: 76/56px, color: #5B4FFF, icon: calculator)
+- **Payment Display Cards**: The three metric cards (Total Payment, Monthly Payment, Payment Breakdown) with new layout rules
 
 ## Success Criteria *(mandatory)*
 
-<!--
-  ACTION REQUIRED: Define measurable success criteria.
-  These must be technology-agnostic and measurable.
--->
-
 ### Measurable Outcomes
 
-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- **SC-001**: Users can identify Total Payment as the primary metric within 2 seconds of viewing the results
+- **SC-002**: All interactive elements remain accessible and not obscured by the toolbar at any breakpoint, complying with WCAG 2.1 AA standards
+- **SC-003**: Users receive immediate feedback for calculations with no navigation away from current view
+- **SC-004**: 100% of users can navigate to Loan Simulator with single click/tap from any page position
 
 ## Assumptions
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right assumptions based on reasonable defaults
-  chosen when the feature description did not specify certain details.
--->
-
-- [Assumption about target users, e.g., "Users have stable internet connectivity"]
-- [Assumption about scope boundaries, e.g., "Mobile support is out of scope for v1"]
-- [Assumption about data/environment, e.g., "Existing authentication system will be reused"]
-- [Dependency on existing system/service, e.g., "Requires access to the existing user profile API"]
+- Existing PaymentDisplay component structure will remain unchanged except for layout order
+- Toast notifications will be managed through a React context provider at the App shell level  
+- Toolbar will use standard web scrolling APIs to navigate to the loan form
+- Icon library (Heroicons, Lucide, or equivalent) is already available in the project
+- CSS Grid will be used for the two-column card layout without additional dependencies

@@ -146,4 +146,26 @@ For example, to create the Loan Calculation API feature we need to create the in
 
 /specs is automatically generated during the flow
 
+INTRODUCE NEW FEATURE
+1. Specify
 Say we want to add some adjusment. We need to create the specification file, see the /preparation/5.styling-adjustment.md and then run "/speckit.specify @preparation/5.styling-adjustment.md"
+This step creates the requirement file under /specs based on our specification file .styling-adjustment.md
+Each file under under /specs would be similar to the spring planning output. The spring scope. This file includes features for front, backend, etc. These task would have been carried out by a dev in one week. We can say that each file under /prepation is a sprint.
+
+
+2. run /speckit.clarify to ask the agent for possible clarifications required. It will analize the current specification for any ambiguities that need clarification. Here the iteration can be back & forth a lot and we may waste a lot of tokens. That's why we need to have a very detailed specification.
+We can execute speckit.clarify as many times as required. Ideally we should run it twice or till its question are irrelevant.
+3. Once all critical ambiguities have been addressed. The specification is now ready for technical planning.
+Run: /speckit.plan @preparation/technical.md considering @preparation/styling.md
+
+Output should be: it generated a comprehensive implementation plan for the Loan Simulator based on the technical and styling specifications, outlining the backend (FastAPI) and frontend (React/TypeScript) architecture, implementation steps, and key technical decisions.
+
+4. Consering the planning, now it needs to crate small task that can be implemented later by the same code agent.
+run /speckit.analyze 
+This will create a tasks.md file under /specs/feature-x
+Sample: Generated: specs/005-styling-adjustment/tasks.md
+
+5. Optional. We can run /speckit.clarify 
+
+6. Now let's execute the implementation plan by processing all tasks defined in tasks.md.
+run /speckit.implement 
