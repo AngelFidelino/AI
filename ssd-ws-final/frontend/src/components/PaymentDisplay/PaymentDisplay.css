@@ -1,0 +1,198 @@
+.payment-display {
+  width: 100%;
+}
+
+/* Placeholder state */
+.payment-display__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  background: #f9fafb;
+  border-radius: 12px;
+  border: 2px dashed #d1d5db;
+  padding: 32px;
+}
+
+.payment-display__placeholder p {
+  color: #6b7280;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Cards container — Desktop (>= 1024px) default */
+.payment-display__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* Base card styling */
+.payment-display__card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px 32px;
+}
+
+/* Card header */
+.payment-display__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.payment-display__card-label {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.payment-display__card-icon {
+  font-size: 1.25rem;
+  color: #9ca3af;
+}
+
+/* Amount display */
+.payment-display__amount {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.payment-display__amount--primary {
+  font-size: 3rem;
+}
+
+/* Card description */
+.payment-display__card-description {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+/* Monthly payment card */
+.payment-display__card--monthly {
+  background: #ffffff;
+}
+
+/* Total payment card — featured purple gradient */
+.payment-display__card--total {
+  background: linear-gradient(135deg, #5B4FFF 0%, #7C6FFF 100%);
+}
+
+.payment-display__card--total .payment-display__card-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.payment-display__card--total .payment-display__card-icon {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.payment-display__card--total .payment-display__amount {
+  color: #ffffff;
+}
+
+.payment-display__card--total .payment-display__card-description {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Breakdown card — full width */
+.payment-display__card--breakdown {
+  grid-column: 1 / -1;
+}
+
+.payment-display__card--breakdown .payment-display__card-label {
+  margin-bottom: 16px;
+}
+
+/* Breakdown grid */
+.payment-display__breakdown-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.payment-display__breakdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.payment-display__breakdown-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.payment-display__breakdown-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Tablet: 768px - 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .payment-display__cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .payment-display__card {
+    padding: 20px 24px;
+  }
+
+  .payment-display__amount--primary {
+    font-size: 2.5rem;
+  }
+
+  .payment-display__amount {
+    font-size: 1.75rem;
+  }
+
+  .payment-display__breakdown-value {
+    font-size: 1.25rem;
+  }
+}
+
+/* Mobile: < 768px */
+@media (max-width: 767px) {
+  .payment-display__cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .payment-display__card--breakdown {
+    grid-column: 1;
+  }
+
+  .payment-display__card {
+    padding: 20px 24px;
+  }
+
+  .payment-display__amount--primary {
+    font-size: 2.25rem;
+  }
+
+  .payment-display__amount {
+    font-size: 1.5rem;
+  }
+
+  .payment-display__breakdown-value {
+    font-size: 1.25rem;
+  }
+
+  .payment-display__breakdown-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}

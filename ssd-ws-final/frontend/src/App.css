@@ -1,0 +1,40 @@
+.app-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 24px;
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+}
+
+.results {
+  padding: 24px;
+}
+
+/* Tablet: 768px - 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .app-layout {
+    grid-template-columns: 270px 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+}
+
+/* Mobile: < 768px */
+@media (max-width: 767px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .sidebar {
+    position: static;
+  }
+}

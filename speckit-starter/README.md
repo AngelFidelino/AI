@@ -8,12 +8,20 @@ Installation
 		install: powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 		uv --version
 		
+	PNPM (Optional). Fast, disk space efficient package manager
+		iwr https://get.pnpm.io/install.ps1 -useb | iex
+	
 	Spec Kit CLI
 		install: uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
 		note: If you're getting certificate issues add: "--allow-insecure-host pypi.org --allow-insecure-host files.pythonhosted.org". Don’t do that unless you fully understand the risk. It disables SSL verification.
 		specify check
 		Alternative (One-time Use): Uv-version uvx --from git+https://github.com/github/spec-kit.git specify init <PROJECT>
-
+		
+		uv --allow-insecure-host pypi.org --allow-insecure-host files.pythonhosted.org sync
+	
+	Node
+		Install a modern version (Node 18+ or 20+)
+		
 Create New Project
 	specify init <project_name>
 
