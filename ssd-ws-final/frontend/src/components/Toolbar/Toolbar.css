@@ -1,0 +1,58 @@
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 76px;
+  height: 100vh;
+  background-color: #5B4FFF;
+  background: linear-gradient(135deg, #5B4FFF 0%, #4A3FE8 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  z-index: 100;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    width: 56px;
+    padding: 1.5rem 0;
+  }
+}
+
+.toolbar__button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.toolbar__button:hover,
+.toolbar__button:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.toolbar__button:active {
+  transform: translateY(0);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toolbar__button {
+    transition: none;
+  }
+  
+  .toolbar__button:hover,
+  .toolbar__button:focus {
+    transform: none;
+  }
+}

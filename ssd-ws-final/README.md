@@ -169,3 +169,7 @@ Sample: Generated: specs/005-styling-adjustment/tasks.md
 
 6. Now let's execute the implementation plan by processing all tasks defined in tasks.md.
 run /speckit.implement 
+
+Hint: have as much information as possible so that we can answer all the question the agent can have.
+
+SSD is more suitable for token: get something for your tokens

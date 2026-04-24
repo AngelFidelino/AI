@@ -4,6 +4,7 @@
   gap: 24px;
   min-height: 100vh;
   padding: 24px;
+  padding-left: 100px; /* 76px toolbar + 24px gap */
   box-sizing: border-box;
 }
 
@@ -23,6 +24,7 @@
     grid-template-columns: 270px 1fr;
     gap: 16px;
     padding: 16px;
+    padding-left: 88px; /* 56px toolbar + 16px gap */
   }
 }
 
@@ -32,6 +34,7 @@
     grid-template-columns: 1fr;
     gap: 16px;
     padding: 16px;
+    padding-left: 72px; /* 56px toolbar + 16px gap */
   }
 
   .sidebar {

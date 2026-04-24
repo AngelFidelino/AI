@@ -11,23 +11,6 @@ export function PaymentDisplay({ data }: PaymentDisplayProps) {
         </section>
       ) : (
         <div className="payment-display__cards">
-          {/* Monthly Payment Card */}
-          <section
-            className="payment-display__card payment-display__card--monthly"
-            aria-label="Monthly Payment"
-          >
-            <div className="payment-display__card-header">
-              <h3 className="payment-display__card-label">Monthly Payment</h3>
-              <span className="payment-display__card-icon" aria-hidden="true">$</span>
-            </div>
-            <p className="payment-display__amount payment-display__amount--primary">
-              {formatCurrency(data.monthlyPayment)}
-            </p>
-            <p className="payment-display__card-description">
-              Amount due each month
-            </p>
-          </section>
-
           {/* Total Payment Card (Featured) */}
           <section
             className="payment-display__card payment-display__card--total"
@@ -42,6 +25,23 @@ export function PaymentDisplay({ data }: PaymentDisplayProps) {
             </p>
             <p className="payment-display__card-description">
               Over loan lifetime
+            </p>
+          </section>
+
+          {/* Monthly Payment Card */}
+          <section
+            className="payment-display__card payment-display__card--monthly"
+            aria-label="Monthly Payment"
+          >
+            <div className="payment-display__card-header">
+              <h3 className="payment-display__card-label">Monthly Payment</h3>
+              <span className="payment-display__card-icon" aria-hidden="true">$</span>
+            </div>
+            <p className="payment-display__amount payment-display__amount--primary">
+              {formatCurrency(data.monthlyPayment)}
+            </p>
+            <p className="payment-display__card-description">
+              Amount due each month
             </p>
           </section>
 

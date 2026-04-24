@@ -2,10 +2,15 @@ import { useState } from 'react';
 import { LoanForm } from './components/LoanForm';
 import { PaymentDisplay } from './components/PaymentDisplay';
 import { InstallmentTable } from './components/InstallmentTable';
+import { Toolbar } from './components/Toolbar/Toolbar';
+import { ToastProvider } from './contexts/ToastContext';
+import { Toast } from './components/Toast/Toast';
+import { useToast } from './contexts/ToastContext';
 import type { LoanResult, PaymentDisplayData } from './types/loan';
 import './App.css';
 
-function App() {
+function AppContent() {
+  const { showToast } = useToast();
   const [result, setResult] = useState<LoanResult | null>(null);
   const [loanAmount, setLoanAmount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -15,6 +20,7 @@ function App() {
     setResult(calcResult);
     setLoanAmount(principal);
     setError(null);
+    showToast('Calculation completed successfully', 'success');
   };
 
   const handleLoadingChange = (loading: boolean) => {
@@ -28,6 +34,9 @@ function App() {
 
   const handleError = (errorMessage: string | null) => {
     setError(errorMessage);
+    if (errorMessage) {
+      showToast(`Calculation failed: ${errorMessage}`, 'error');
+    }
   };
 
   const handleRetry = () => {
@@ -46,8 +55,9 @@ function App() {
       }
     : null;
 
-  return (
+return (
     <div className="app-layout">
+      <Toolbar />
       <aside className="sidebar">
         <LoanForm
           onCalculate={handleCalculate}
@@ -65,7 +75,16 @@ function App() {
           onRetry={handleRetry}
         />
       </main>
+      <Toast />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ToastProvider>
+      <AppContent />
+    </ToastProvider>
   );
 }
 
