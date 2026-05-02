@@ -48,4 +48,23 @@ Create the constitution file. This is done only once. Then pass it to the /speck
 	/speckit.constitution @resources/preparation/constitution.md
 
 Create the first specification
-	
+
+
+SSD WITH SPECKIT VS SSD WITH OPENSPEC
+Openspec is a lightweight, sepc driven framework for AI coding assistant that brings structure and predictability tp AI-assisted development.
+Openspec: Fuild (not rigid), Iterative (not waterfall), Scalable
+
+SSD Approach
+* specification fist
+* specs become executable
+* sepcs are the source of truth
+* AI implements from specs
+
+Traditional AI Coding Disadvantages
+* Inconsistent output.
+* Context loss. AI forgets requirements across sessions.
+* No Traceability. Can't trace code back to original intent
+* Scope Creep. AI implements beyond what was requested
+
+
+
