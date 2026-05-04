@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import './LoanForm.css';
+import React, { useState } from 'react';
+import Field from './Field.jsx';
 
 const LoanForm = ({ onCalculate, isLoading }) => {
   const [formData, setFormData] = useState({
@@ -9,109 +9,144 @@ const LoanForm = ({ onCalculate, isLoading }) => {
   });
   
   const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
+  const handleChange = (field) => (e) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: e.target.value
+    }));
+  };
+
+  const handleBlur = (field) => (e) => {
+    setTouched(prev => ({
+      ...prev,
+      [field]: true
+    }));
+  };
 
   const validateForm = () => {
     const newErrors = {};
     
-    if (!formData.amount || parseFloat(formData.amount) <= 0) {
+    if (!formData.amount || formData.amount <= 0) {
       newErrors.amount = 'Loan amount must be greater than 0';
-    } else if (parseFloat(formData.amount) < 1000) {
-      newErrors.amount = 'Loan amount must be at least $1,000';
-    } else if (parseFloat(formData.amount) > 10000000) {
-      newErrors.amount = 'Loan amount cannot exceed $10,000,000';
     }
     
-    if (!formData.rate || parseFloat(formData.rate) < 0) {
-      newErrors.rate = 'Interest rate must be 0 or greater';
-    } else if (parseFloat(formData.rate) > 100) {
-      newErrors.rate = 'Interest rate cannot exceed 100%';
+    if (!formData.rate || formData.rate <= 0 || formData.rate > 100) {
+      newErrors.rate = 'Interest rate must be between 0 and 100';
     }
     
-    if (!formData.term || parseInt(formData.term) <= 0) {
-      newErrors.term = 'Loan term must be greater than 0';
-    } else if (parseInt(formData.term) > 360) {
-      newErrors.term = 'Loan term cannot exceed 360 months (30 years)';
+    if (!formData.term || formData.term <= 0 || formData.term > 1200) {
+      newErrors.term = 'Loan term must be between 1 and 1200 months';
     }
     
     setErrors(newErrors);
+    setTouched({ amount: true, rate: true, term: true });
+    
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     if (validateForm()) {
-      onCalculate(formData);
+      onCalculate({
+        amount: parseFloat(formData.amount),
+        rate: parseFloat(formData.rate),
+        term: parseInt(formData.term)
+      });
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    
-    // Clear error for this field when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
-  };
+  const isMouseDown = useState(false);
 
   return (
-    <form onSubmit={handleSubmit} className="loan-form">
-      <div className="form-group">
-        <label htmlFor="amount">Loan Amount ($)</label>
-        <input
+    <div style={{
+      backgroundColor: 'var(--white)',
+      borderRadius: '16px',
+      border: '1px solid var(--border)',
+      boxShadow: '0 1px 2px rgba(0,0,0,0.08)',
+      padding: '24px'
+    }}>
+      <form onSubmit={handleSubmit}>
+        <h2 style={{
+          fontSize: '20px',
+          fontWeight: '600',
+          color: 'var(--text-primary)',
+          margin: '0 0 24px 0'
+        }}>
+          Loan Details
+        </h2>
+        
+        <Field
+          label="Loan Amount ($)"
           type="number"
-          id="amount"
-          name="amount"
+          placeholder="100,000"
           value={formData.amount}
-          onChange={handleChange}
-          placeholder="100000"
-          step="0.01"
-          min="0"
+          onChange={handleChange('amount')}
+          onBlur={handleBlur('amount')}
+          error={errors.amount}
+          touched={touched.amount}
+          disabled={isLoading}
         />
-        {errors.amount && <span className="error">{errors.amount}</span>}
-      </div>
-      
-      <div className="form-group">
-        <label htmlFor="rate">Annual Interest Rate (%)</label>
-        <input
+        
+        <Field
+          label="Annual Interest Rate (%)"
           type="number"
-          id="rate"
-          name="rate"
+          step="0.1"
+          placeholder="5.5"
           value={formData.rate}
-          onChange={handleChange}
-          placeholder="6.5"
-          step="0.01"
-          min="0"
-          max="100"
+          onChange={handleChange('rate')}
+          onBlur={handleBlur('rate')}
+          error={errors.rate}
+          touched={touched.rate}
+          disabled={isLoading}
         />
-        {errors.rate && <span className="error">{errors.rate}</span>}
-      </div>
-      
-      <div className="form-group">
-        <label htmlFor="term">Loan Term (months)</label>
-        <input
+        
+        <Field
+          label="Loan Term (months)"
           type="number"
-          id="term"
-          name="term"
-          value={formData.term}
-          onChange={handleChange}
           placeholder="360"
-          min="1"
-          max="360"
+          value={formData.term}
+          onChange={handleChange('term')}
+          onBlur={handleBlur('term')}
+          error={errors.term}
+          touched={touched.term}
+          disabled={isLoading}
         />
-        {errors.term && <span className="error">{errors.term}</span>}
-      </div>
-      
-      <button type="submit" disabled={isLoading} className="calculate-btn">
-        {isLoading ? 'Calculating...' : 'Calculate Loan'}
-      </button>
-    </form>
+        
+        <button
+          type="submit"
+          disabled={isLoading}
+          style={{
+            width: '100%',
+            height: '44px',
+            backgroundColor: 'var(--purple)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '16px',
+            fontWeight: '600',
+            cursor: isLoading ? 'not-allowed' : 'pointer',
+            opacity: isLoading ? 0.7 : 1,
+            transition: 'transform 0.15s ease'
+          }}
+          onMouseDown={(e) => {
+            if (!isLoading) {
+              e.target.style.transform = 'scale(0.98)';
+            }
+          }}
+          onMouseUp={(e) => {
+            e.target.style.transform = 'scale(1)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'scale(1)';
+          }}
+        >
+          {isLoading ? 'Calculating…' : 'Calculate'}
+        </button>
+      </form>
+    </div>
   );
 };
 

@@ -41,3 +41,7 @@ build/
 *.log
 *.tsbuildinfo
 .vite/
+
+#
+.kilocode
+.specify

@@ -199,28 +199,43 @@ This application demonstrates:
 
 This project is for educational purposes only. Not intended for production use.
 
+
+====
+Use openspec over speckit when working with small and non-complex proyects.
+Suggestion: use speckit when starting a project from scratch
+
 Files in /preparations are script definitions
 
 Commands:
 
 /opsx:propose @preparation/propose.md
+   We could go to /opsx:apply now
 
 /opsx:new  @preparation/formal-specs.md
+   Start a new change scaffold. Creates the change folder and waits for us to generate artifacts with /opsx:continue or /opsx:ff
 
 /opsx:ff @preparation/task-plan.md
-
+   Analzye whether the required information is completed
+   Generates all planning artifacts in one pass. Ideal for straightforward bug fixes or simple additions where full ceremony isn't needed.
 /opsx:apply system-architecture @preparation/deploy-task.md
 
 /opsx:archive system-architecture
 
 =======================================================================
+To introduce new changes we need to follow the same flow, say we need to redesign the ui:
+The current Loan Calculator UI lacks modern design standards, suffers from inconsistent styling, and missing number formatting features. This redesign is needed to provide users with a professional, intuitive interface that follows established design patterns and improves the overall user experience with proper number formatting.
 
 /opsx:propose @preparation/ui-redesign-propose.md
 
 /opsx:new @preparation/ui-redesign-formal-specs.md
-
+   Start a new change scaffold
 /opsx:ff ui-redesign @preparation/ui-redesign-task-plan.md
-
+   FF: Fast-forward: create all planning artifacts at once
 /opsx:apply ui-redesign @preparation/ui-redesign-deploy-task.md
 
 /opsx:archive ui-redesign
+
+===
+Every new change will need an spec file (.md file), so any feature change don't roll it back; and using /opsx:new 
+
+Note: somtimes /opsx:x command won't be recognizable as command. The reason is due to the agent we're using sometimes those commands are considered skills rather than steps in the flow. 
