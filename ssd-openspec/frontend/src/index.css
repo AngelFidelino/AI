@@ -1,0 +1,145 @@
+/* Design Tokens for UI Redesign */
+:root {
+  /* Colors */
+  --purple: #4f39f6;
+  --purple-dark: #372aac;
+  --gradient-total: linear-gradient(135deg, #615fff, #432dd7);
+  --bg-app: #f8fafc;
+  --white: #ffffff;
+  --border: #e2e8f0;
+  --input-bg: #f3f3f5;
+  --text-primary: #0f172b;
+  --text-label: #314158;
+  --text-secondary: #62748e;
+  --text-placeholder: #717182;
+  --badge-interest-bg: #fffbeb;
+  --badge-interest-text: #bb4d00;
+  --badge-total-bg: #fef3c6;
+  --badge-total-text: #973c00;
+  --toast-bg: #f0fdf4;
+  --toast-border: #bbf7d0;
+  
+  /* Typography - Inter Font */
+  --font-inter: 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Font specifications */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-label);
+}
+
+.table-header {
+  font-size: 12px;
+  font-weight: 600;
+  color: #45556c;
+}
+
+/* Animation Keyframes */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes barFill {
+  0% { width: 0%; }
+  100% { width: var(--target-width, 100%); }
+}
+
+/* Animation Classes */
+.anim {
+  animation: fadeUp 300ms ease 0ms;
+}
+
+.anim1 {
+  animation: fadeUp 300ms ease 50ms;
+}
+
+.anim2 {
+  animation: fadeUp 300ms ease 100ms;
+}
+
+.anim3 {
+  animation: fadeUp 300ms ease 150ms;
+}
+
+/* Global Layout Classes */
+.main-layout {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0;
+  min-height: 100vh;
+  background: var(--bg-app);
+}
+
+.sidebar {
+  width: 80px;
+  background: linear-gradient(180deg, var(--purple) 0%, var(--purple-dark) 100%);
+  display: block;
+}
+
+.main-content {
+  padding: 48px 40px;
+  max-width: 100%;
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: 389px 1fr;
+  gap: 24px;
+}
+
+.breakdown-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 899px) {
+  .sidebar {
+    display: none;
+  }
+  
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .main-content {
+    padding: 24px 20px;
+  }
+  
+  .payment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 599px) {
+  .main-content {
+    padding: 20px 16px;
+  }
+  
+  .breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Global Styles */
+body {
+  margin: 0;
+  background: var(--bg-app);
+  font-family: var(--font-inter);
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}

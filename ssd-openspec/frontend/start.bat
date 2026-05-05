@@ -1,0 +1,9 @@
+@echo off
+echo Starting React frontend development server...
+cd /d "%~dp0"
+if not exist "node_modules" (
+    echo Installing dependencies...
+    pnpm install
+)
+echo Starting frontend on port 5173...
+pnpm run dev

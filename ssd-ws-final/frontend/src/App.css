@@ -1,0 +1,43 @@
+.app-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 24px;
+  min-height: 100vh;
+  padding: 24px;
+  padding-left: 100px; /* 76px toolbar + 24px gap */
+  box-sizing: border-box;
+}
+
+.sidebar {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+}
+
+.results {
+  padding: 24px;
+}
+
+/* Tablet: 768px - 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .app-layout {
+    grid-template-columns: 270px 1fr;
+    gap: 16px;
+    padding: 16px;
+    padding-left: 88px; /* 56px toolbar + 16px gap */
+  }
+}
+
+/* Mobile: < 768px */
+@media (max-width: 767px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+    padding-left: 72px; /* 56px toolbar + 16px gap */
+  }
+
+  .sidebar {
+    position: static;
+  }
+}

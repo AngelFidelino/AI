@@ -1,0 +1,218 @@
+/* Card container */
+.installment-table {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  margin-top: 24px;
+}
+
+/* Card header */
+.installment-table__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.installment-table__header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Payment count badge */
+.installment-table__count {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* State containers */
+.installment-table__placeholder,
+.installment-table__loading,
+.installment-table__empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.installment-table__error {
+  text-align: center;
+  padding: 32px 16px;
+}
+
+.installment-table__error-message {
+  color: #dc2626;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.installment-table__retry-button {
+  background-color: #5b4fff;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.installment-table__retry-button:hover {
+  background-color: #4a3fe6;
+}
+
+.installment-table__retry-button:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+
+/* Table wrapper for horizontal scroll */
+.installment-table__wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Table base */
+.installment-table__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  font-size: 14px;
+}
+
+/* Visually hidden caption for accessibility */
+.installment-table__caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Column headers */
+.installment-table__head th {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+  background-color: #ffffff;
+}
+
+/* Table body cells */
+.installment-table__cell {
+  padding: 10px 12px;
+  color: #374151;
+  border-bottom: 1px solid #f3f4f6;
+  white-space: nowrap;
+}
+
+/* Payment number column */
+.installment-table__payment-number {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+/* Progress bar container */
+.installment-table__progress {
+  width: 100%;
+  min-width: 80px;
+  height: 8px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Progress bar fill */
+.installment-table__progress-fill {
+  height: 100%;
+  background-color: #5b4fff;
+  border-radius: 4px;
+  transition: width 0.2s ease;
+}
+
+/* Summary row (tfoot) */
+.installment-table__row--summary {
+  font-weight: 700;
+}
+
+.installment-table__foot tr {
+  border-top: 2px solid #e5e7eb;
+  background-color: #f3f4f6;
+}
+
+.installment-table__foot .installment-table__cell {
+  border-bottom: none;
+}
+
+/* Interest column highlighting */
+.installment-table__interest {
+  color: #d97706;
+  background-color: #fef3c7;
+}
+
+/* Zebra striping */
+.installment-table__body tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+/* Sticky header */
+.installment-table__head th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* Desktop: full table */
+@media (min-width: 1024px) {
+  .installment-table__table {
+    width: 100%;
+    table-layout: auto;
+  }
+}
+
+/* Mobile: horizontal scroll with sticky first column */
+@media (max-width: 767px) {
+  .installment-table__table {
+    min-width: 700px;
+  }
+
+  .installment-table__body td:first-child,
+  .installment-table__head th:first-child,
+  .installment-table__foot td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: inherit;
+  }
+
+  /* Corner cell (header + first column intersection) */
+  .installment-table__head th:first-child {
+    z-index: 3;
+  }
+}
+
+/* Data integrity warning */
+.installment-table__warning {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background-color: #fef3c7;
+  border: 1px solid #d97706;
+  border-radius: 6px;
+  color: #92400e;
+  font-size: 13px;
+  line-height: 1.5;
+}

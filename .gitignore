@@ -1,1 +1,47 @@
 .resources/
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables
+.env*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# uv
+uv.lock
+
+# Node.js / Frontend
+node_modules/
+dist/
+build/
+*.log
+*.tsbuildinfo
+.vite/
+
+#
+.kilocode
+.specify

@@ -1,0 +1,13 @@
+/* App.css - Minimal CSS for App.jsx specific styles */
+/* Most styling is done through inline styles and global classes in index.css */
+
+.App {
+  /* Layout handled by main-layout class in index.css */
+}
+
+/* Additional responsive utilities */
+@media (max-width: 899px) {
+  .sidebar {
+    display: none !important;
+  }
+}
